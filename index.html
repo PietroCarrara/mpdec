@@ -2,18 +2,23 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Hello World!</title>
+    <title>mpdec!</title>
   </head>
   <body>
-    <h1>Hello World!</h1>
-    <!-- All of the Node.js APIs are available in this renderer process. -->
-    We are using Node.js <script>document.write(process.versions.node)</script>,
-    Chromium <script>document.write(process.versions.chrome)</script>,
-    and Electron <script>document.write(process.versions.electron)</script>
+
+    <!-- Topmost container. Maybe use to contain tabs? -->
+    <div id="top-container"></div>
+
+    <!-- Main container. Use to render current view -->
+    <div id="main-container"></div>
+
+    <!-- Bottommost container. Maybe use to contain info and a progress bar? -->
+    <div id="bot-container"></div>
+    
   </body>
 
   <script>
     // You can also require other files to run in this process
-    require('./dist/renderer.js')
+    require('./dist/bootstrap.js')
   </script>
 </html>
