@@ -1,29 +1,32 @@
 <!DOCTYPE html>
 <html class="h-100">
-  <head>
-    <meta charset="UTF-8">
-    <title>mpdec!</title>
 
-    <link href="./node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-  </head>
-  <body class="d-flex flex-column h-100">
+<head>
+  <meta charset="UTF-8">
+  <title>mpdec!</title>
 
-    <!-- Topmost container. Maybe use to contain tabs? -->
-    <div id="top-container"></div>
+  <link href="./node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
 
-    <!-- Main container. Use to render current view -->
-    <main role="main" class="flex-shrink-0">
-      <div id="main-container"></div>
-    </main>
+<body class="d-flex flex-column h-100">
 
-    <!-- Bottommost container. Maybe use to contain info and a progress bar? -->
-    <footer class="footer mt-auto py-3">
-      <div id="bot-container"></div>
-    </footer>
-    
-  </body>
+  <!-- Topmost container. Maybe use to contain tabs? -->
+  <div id="top-container"></div>
 
-  <script>
-    require('./dist/bootstrap.js')
-  </script>
+  <!-- Main container. Use to render current view -->
+  <main role="main" class="flex-shrink-0">
+    <div id="main-container"></div>
+  </main>
+
+  <!-- Bottommost container. Maybe use to contain info and a progress bar? -->
+  <footer class="footer mt-auto py-3">
+    <div id="bot-container"></div>
+  </footer>
+
+</body>
+
+<script>
+  require('./dist/bootstrap.js')
+</script>
+
 </html>
