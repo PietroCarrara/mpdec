@@ -1,5 +1,5 @@
-# mpdec
-=======
+mpdec
+=====
 
 Electron-based mpd client
 
