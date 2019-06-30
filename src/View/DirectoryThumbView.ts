@@ -4,6 +4,7 @@ import { View } from "./View";
 export class DirectoryThumbView extends View {
 
     private titleLabel: HTMLElement;
+    private mainContainer: HTMLElement;
 
     private directory: Directory;
     
@@ -13,10 +14,14 @@ export class DirectoryThumbView extends View {
         this.directory = dir;
     }
 
-    public onLoad(): void {
+    public async onLoad() {
         this.titleLabel = this.element.querySelector('#directory-title');
+        this.mainContainer = this.element;
 
         this.titleLabel.innerText = this.directory.path;
+
+        var url = await this.directory.getThumbnail();
+        this.mainContainer.style.background = `url(${url})`;
     }
 
     public onShow(): void {

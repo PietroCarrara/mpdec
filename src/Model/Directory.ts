@@ -1,6 +1,7 @@
 import {Directory as MpdDirectory} from 'mpc-js';
 import { Song } from './Song';
 import { MusicPlayerService } from '../Services/MusicPlayerService';
+import { Assets } from './AssetsEnum';
 
 export class Directory {
 
@@ -32,5 +33,11 @@ export class Directory {
         }
         
         return this.contents;
+    }
+
+    public async getThumbnail() {
+        /** @todo implement */
+
+        return `file://${Assets.NoPic}`;
     }
 }
