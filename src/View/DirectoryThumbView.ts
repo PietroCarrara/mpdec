@@ -22,11 +22,6 @@ export class DirectoryThumbView extends View {
 
         var url = await this.directory.getThumbnail();
         this.mainContainer.style.background = `url(${url})`;
-
-        this.mainContainer.onclick = () => {
-            alert(url);
-            console.log(url);
-        };
     }
 
     public onShow(): void {

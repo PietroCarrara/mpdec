@@ -1,4 +1,4 @@
-import {Directory as MpdDirectory} from 'mpc-js';
+import { Directory as MpdDirectory } from 'mpc-js';
 import { Song } from './Song';
 import { MusicPlayerService } from '../Services/MusicPlayerService';
 import { Assets } from './AssetsEnum';
@@ -16,8 +16,8 @@ export class Directory {
 
     public readonly path: string;
 
-    private contents: (Song|Directory)[];
-    
+    private contents: (Song | Directory)[];
+
     private constructor(info: any) {
         this.path = info.path;
     }
@@ -36,12 +36,13 @@ export class Directory {
             var playerService = MusicPlayerService.getInstance();
             this.contents = await playerService.getContentsOf(this.path);
         }
-        
+
         return this.contents;
     }
 
     public async getThumbnail() {
         var userConfig = UserConfig.getInstance();
+        var res: string;
 
         if (userConfig.musicDir) {
             var path = `${userConfig.musicDir}/${this.path}`;
@@ -61,10 +62,20 @@ export class Directory {
             });
 
             if (contents.length > 0) {
-                return encodeURI(`file://${path}/${contents[0]}`);
+                res = `${path}/${contents[0]}`;
             }
         }
 
-        return encodeURI(`file://${Assets.NoPic}`);
+        if (!res) {
+            res = Assets.NoPic;
+        }
+
+        res = encodeURI(res)
+            .replace(/'/g, "\\'")
+            .replace(/"/g, '\\"')
+            .replace(/\(/g, '\\(')
+            .replace(/\)/g, "\\)");
+
+        return `file://${res}`;
     }
 }
