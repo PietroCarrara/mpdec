@@ -1,7 +1,8 @@
-import { MPC } from 'mpc-js';
+import { MPC, Song as MpdSong, Playlist, Directory as MpdDirectory } from 'mpc-js';
 import { EventEmitter } from 'events';
 import { Song } from '../Model/Song';
 import { PlaybackState } from '../Model/PlaybackStateEnum';
+import { Directory } from '../Model/Directory';
 
 export class MusicPlayerService {
 
@@ -36,6 +37,21 @@ export class MusicPlayerService {
         var status = await this.mpc.status.status();
         
         return status.state;
+    }
+
+    public async getContentsOf(where = '/') {
+        var contents = await this.mpc.database.listInfo(where);
+
+        var res: (Song|Directory)[] = [];
+
+        for (var c of contents) {
+            
+            if (c instanceof MpdSong) res.push(Song.fromMpdSong(c));
+            if (c instanceof MpdDirectory) res.push(Directory.fromMpdDirectory(c));
+            // if (c instanceof Playlist) ;
+        }
+
+        return res;
     }
 
     public async togglePlaybackState() {
