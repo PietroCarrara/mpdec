@@ -16,6 +16,21 @@ export class Song {
         this.path = data.path;
         this.track = data.track;
         this.disc = data.disc;
+
+        var fileParts = this.path.split('/');
+        var filename = fileParts[fileParts.length - 1];
+
+        if (!this.artist || this.artist === '') {
+            this.artist = filename.split('-')[0].trim();
+        }
+
+        if (!this.title || this.title === '') {
+            var albumParts = filename.split('-');
+            console.log(albumParts);
+            if (albumParts.length > 1) {
+                this.title = albumParts.slice(1).join().trim();
+            }
+        }
     }
 
     public static fromMpdSong(mpdSong: MpdSong) {
