@@ -16,17 +16,8 @@ export class ViewService {
     }
 
     public load(view: View, container: HTMLElement) {
-        this.removeChildrenFromContainer(container);
-
         container.appendChild(view.element);
 
         view.onLoad();
-    }
-
-    private removeChildrenFromContainer(container: HTMLElement) {
-        // While there exists a child, remote
-        while (container.firstChild) {
-            container.removeChild(container.firstChild);
-        }
     }
 }

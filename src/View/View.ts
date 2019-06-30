@@ -10,8 +10,12 @@ export abstract class View {
 
     public constructor(file: string) {
         var html = readFileSync(__dirname + '/../../view/' + file);
-        this.element = document.createElement('div');
-        this.element.innerHTML = html.toString();
+
+        // Temporary element just to parse the html
+        var el = document.createElement('div');
+        el.innerHTML = html.toString();
+
+        this.element = el.firstChild as HTMLElement;
     }
 
     /**
