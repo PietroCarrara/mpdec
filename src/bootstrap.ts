@@ -1,18 +1,23 @@
 import { ControlsView } from "./View/ControlsView";
 import { ViewService } from "./Services/ViewService";
 import { BottomInfoView } from "./View/BottomInfoView";
+import { DirectoryView } from "./View/DirectoryView";
+import { MusicPlayerService } from "./Services/MusicPlayerService";
+import { Directory } from "./Model/Directory";
 
 // This file is required by the index.html file and will
 // be executed in the renderer process for that window.
 // All of the Node.js APIs are available in this process.
 
 var viewService = ViewService.getInstance();
+var playerService = MusicPlayerService.getInstance();
 
 var mainContainer = document.getElementById('main-container');
 var bottomContainer = document.getElementById('bot-container');
 
 var controlsView = new ControlsView();
+var directoryView = new DirectoryView(Directory.root);
 var bottomInfoView = new BottomInfoView();
 
-viewService.load(controlsView, mainContainer);
+viewService.load(directoryView, mainContainer);
 viewService.load(bottomInfoView, bottomContainer);

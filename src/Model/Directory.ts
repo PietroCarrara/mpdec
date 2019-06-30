@@ -4,6 +4,10 @@ import { MusicPlayerService } from '../Services/MusicPlayerService';
 
 export class Directory {
 
+    public static readonly root = new Directory({
+        path: '/'
+    });
+
     public readonly path: string;
 
     private contents: (Song|Directory)[];
