@@ -26,7 +26,6 @@ export class Song {
 
         if (!this.title || this.title === '') {
             var albumParts = filename.split('-');
-            console.log(albumParts);
             if (albumParts.length > 1) {
                 this.title = albumParts.slice(1).join().trim();
             }

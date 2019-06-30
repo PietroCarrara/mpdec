@@ -21,8 +21,6 @@ export class DirectoryView extends View {
 
         var contents = await this.directory.getContents();
 
-        console.log('Contents are', contents);
-
         for (var c of contents) {
             
             if (c instanceof Song) {
@@ -33,7 +31,6 @@ export class DirectoryView extends View {
                 var viewService = ViewService.getInstance();
                 var dirThumbView = new DirectoryThumbView(c);
 
-                console.log('Loading dir:', c);
                 viewService.load(dirThumbView, this.directoryContainer);
             }
         }
