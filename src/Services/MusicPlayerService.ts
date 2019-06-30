@@ -1,6 +1,7 @@
 import { MPC } from 'mpc-js';
 import { EventEmitter } from 'events';
 import { Song } from '../Model/Song';
+import { PlaybackState } from '../Model/PlaybackStateEnum';
 
 export class MusicPlayerService {
 
@@ -31,6 +32,23 @@ export class MusicPlayerService {
         this.eventEmitter.on('changed-player', callback);
     }
 
+    public async getPlaybackState() {
+        var status = await this.mpc.status.status();
+        
+        return status.state;
+    }
+
+    public async togglePlaybackState() {
+
+        var state = await this.getPlaybackState();
+
+        if (state != PlaybackState.Playing) {
+            this.mpc.playback.play();
+        } else {
+            this.mpc.playback.pause();
+        }
+    }
+    
     public async currentSong() {
         return Song.fromMpdPlaylist(await this.mpc.status.currentSong());
     }
