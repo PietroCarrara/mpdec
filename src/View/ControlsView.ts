@@ -20,7 +20,7 @@ export class ControlsView extends View {
     async onChangePlayer() {
         var song = await this.playerService.currentSong();
 
-        this.currSongSpan.innerText = `${song.getArtist()} - ${song.getTitle()}`;
+        this.currSongSpan.innerText = `${song.artist} - ${song.title}`;
     }
 
     onLoad(): void {
