@@ -22,6 +22,12 @@ export class Directory {
         this.path = info.path;
     }
 
+    public static fromPath(dir: string) {
+        return new Directory({
+            path: dir,
+        });
+    }
+
     public static fromMpdDirectory(dir: MpdDirectory) {
 
         var directory = new Directory({
@@ -43,11 +49,7 @@ export class Directory {
     public async getThumbnailOrDefault() {
         var res = await this.getThumbnail();
 
-        if (!res) {
-            res = `file://${Assets.NoPic}`;
-        }
-
-        return res;
+        return res || Assets.NoPic;
     }
 
     public async getThumbnail(): Promise<string|null> {
@@ -90,12 +92,6 @@ export class Directory {
             return null;
         }
 
-        res = encodeURI(res)
-            .replace(/'/g, "\\'")
-            .replace(/"/g, '\\"')
-            .replace(/\(/g, '\\(')
-            .replace(/\)/g, "\\)");
-
-        return `file://${res}`;
+        return res;
     }
 }

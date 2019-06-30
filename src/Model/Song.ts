@@ -1,4 +1,7 @@
 import { Song as MpdSong, PlaylistItem } from 'mpc-js';
+import { dirname } from 'path';
+import { MusicPlayerService } from '../Services/MusicPlayerService';
+import { Directory } from './Directory';
 
 export class Song {
 
@@ -55,5 +58,21 @@ export class Song {
         });
 
         return song;
+    }
+
+    public equals(s: Song) {
+        return this.path === s.path;
+    }
+
+    public async getThumbnailOrDefault() {
+        var dir = dirname(this.path);
+
+        console.log(dir);
+
+        var directory = Directory.fromPath(dir);
+
+        console.log(await directory.getContents());
+
+        return directory.getThumbnailOrDefault();
     }
 }
