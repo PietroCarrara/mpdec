@@ -40,7 +40,17 @@ export class Directory {
         return this.contents;
     }
 
-    public async getThumbnail() {
+    public async getThumbnailOrDefault() {
+        var res = await this.getThumbnail();
+
+        if (!res) {
+            res = `file://${Assets.NoPic}`;
+        }
+
+        return res;
+    }
+
+    public async getThumbnail(): Promise<string|null> {
         var userConfig = UserConfig.getInstance();
         var res: string;
 
@@ -67,7 +77,17 @@ export class Directory {
         }
 
         if (!res) {
-            res = Assets.NoPic;
+            var playerService = MusicPlayerService.getInstance();
+            for (var content of await playerService.getContentsOf(this.path)) {
+                if (content instanceof Directory) {
+                    var thumb = await content.getThumbnail();
+                    if (thumb) {
+                        return thumb;
+                    }
+                }
+            }
+
+            return null;
         }
 
         res = encodeURI(res)

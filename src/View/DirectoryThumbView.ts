@@ -21,7 +21,7 @@ export class DirectoryThumbView extends View {
 
         this.titleLabel.innerText = this.directory.path;
 
-        var url = await this.directory.getThumbnail();
+        var url = await this.directory.getThumbnailOrDefault();
         this.mainContainer.style.background = `url(${url})`;
 
         this.mainContainer.onclick = async () => {
