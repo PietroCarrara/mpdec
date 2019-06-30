@@ -1,61 +1,45 @@
-import {Song as MpdSong, PlaylistItem} from 'mpc-js';
+import { Song as MpdSong, PlaylistItem } from 'mpc-js';
 
 export class Song {
 
-    private artist: string;
-    private title: string;
-    private album: string;
-    private track: number;
-    private disc: number;
+    public readonly artist: string;
+    public readonly title: string;
+    public readonly album: string;
+    public readonly path: string;
+    public readonly track: number;
+    public readonly disc: number;
 
-    private constructor() {
+    private constructor(data: any) {
+        this.artist = data.artist;
+        this.title = data.title;
+        this.album = data.album;
+        this.path = data.path;
+        this.track = data.track;
+        this.disc = data.disc;
     }
 
     public static fromMpdSong(mpdSong: MpdSong) {
-        if (!mpdSong.isFile()) {
-            throw new Error('A MPD song must be a single file!');
-        }
-        
-        var song = new Song();
-        
-        song.artist = mpdSong.artist;
-        song.title = mpdSong.title;
-        song.album = mpdSong.album;
-        song.track = Number.parseInt(mpdSong.track);
-        song.disc = Number.parseInt(mpdSong.disc);
+        var song = new Song({
+            artist: mpdSong.artist,
+            title: mpdSong.title,
+            album: mpdSong.album,
+            path: mpdSong.path,
+            track: Number.parseInt(mpdSong.track),
+            disc: Number.parseInt(mpdSong.disc),
+        });
 
         return song;
     }
 
     public static fromMpdPlaylist(mpdSong: PlaylistItem) {
-        
-        var song = new Song();
-        
-        song.artist = mpdSong.artist;
-        song.title = mpdSong.title;
-        song.album = mpdSong.album;
+
+        var song = new Song({
+            artist:  mpdSong.artist,
+            title: mpdSong.title,
+            album: mpdSong.album,
+            path: mpdSong.path,
+        });
 
         return song;
     }
-
-    public getArtist(): string {
-        return this.artist;
-    }
-
-    public getTitle(): string {
-        return this.title;
-    }
-
-    public getAlbum(): string {
-        return this.album;
-    }
-
-    public getTrack(): number {
-        return this.track;
-    }
-
-    public getDisc(): number {
-        return this.disc;
-    }
-
 }

@@ -26,9 +26,9 @@ export class BottomInfoView extends View {
     private async onChangePlayer() {
         var song = await this.playerService.currentSong();
 
-        this.artistLabel.innerText = song.getArtist();
-        this.titleLabel.innerText = song.getTitle();
-        this.albumLabel.innerText = song.getAlbum();
+        this.artistLabel.innerText = song.artist;
+        this.titleLabel.innerText = song.title;
+        this.albumLabel.innerText = song.album;
 
         if (await this.playerService.getPlaybackState() != PlaybackState.Playing) {
             this.stateIcon.innerText = 'play_arrow';
