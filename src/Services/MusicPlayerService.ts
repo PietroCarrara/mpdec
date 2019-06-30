@@ -54,14 +54,32 @@ export class MusicPlayerService {
         return res;
     }
 
+    public async clearPlaylist() {
+        this.mpc.currentPlaylist.clear();
+    }
+
+    public async addToPlaylist(toAdd: Song|Directory) {
+        this.mpc.currentPlaylist.add(toAdd.path);
+    }
+
+    public async play() {
+        this.mpc.playback.play();
+    }
+
+    public async pause() {
+        this.mpc.playback.pause();
+    }
+    
     public async togglePlaybackState() {
 
         var state = await this.getPlaybackState();
 
         if (state != PlaybackState.Playing) {
-            this.mpc.playback.play();
+            this.play();
+            return PlaybackState.Playing;
         } else {
-            this.mpc.playback.pause();
+            this.pause();
+            return PlaybackState.Paused;
         }
     }
     

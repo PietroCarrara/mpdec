@@ -1,5 +1,6 @@
 import { Directory } from "../Model/Directory";
 import { View } from "./View";
+import { MusicPlayerService } from "../Services/MusicPlayerService";
 
 export class DirectoryThumbView extends View {
 
@@ -22,6 +23,14 @@ export class DirectoryThumbView extends View {
 
         var url = await this.directory.getThumbnail();
         this.mainContainer.style.background = `url(${url})`;
+
+        this.mainContainer.onclick = async () => {
+            var playerService = MusicPlayerService.getInstance();
+
+            await playerService.clearPlaylist();
+            await playerService.addToPlaylist(this.directory);
+            playerService.play();
+        }
     }
 
     public onShow(): void {
