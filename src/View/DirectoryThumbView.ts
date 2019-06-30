@@ -7,7 +7,7 @@ export class DirectoryThumbView extends View {
     private mainContainer: HTMLElement;
 
     private directory: Directory;
-    
+
     constructor(dir: Directory) {
         super('directoryThumb.html');
 
@@ -22,6 +22,11 @@ export class DirectoryThumbView extends View {
 
         var url = await this.directory.getThumbnail();
         this.mainContainer.style.background = `url(${url})`;
+
+        this.mainContainer.onclick = () => {
+            alert(url);
+            console.log(url);
+        };
     }
 
     public onShow(): void {
