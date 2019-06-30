@@ -1,4 +1,3 @@
-import { ControlsView } from "./View/ControlsView";
 import { ViewService } from "./Services/ViewService";
 import { BottomInfoView } from "./View/BottomInfoView";
 import { DirectoryView } from "./View/DirectoryView";
@@ -15,7 +14,6 @@ var playerService = MusicPlayerService.getInstance();
 var mainContainer = document.getElementById('main-container');
 var bottomContainer = document.getElementById('bot-container');
 
-var controlsView = new ControlsView();
 var directoryView = new DirectoryView(Directory.root);
 var bottomInfoView = new BottomInfoView();
 
