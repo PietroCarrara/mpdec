@@ -25,7 +25,7 @@ export abstract class View {
      * @memberof View
      */
     public navigate(view: View) {
-        
+
     }
 
     /**
@@ -35,5 +35,13 @@ export abstract class View {
      */
     public pop() {
 
+    }
+
+    protected escapeUri(uri: string) {
+        return encodeURI(uri)
+            .replace(/'/g, "\\'")
+            .replace(/"/g, '\\"')
+            .replace(/\(/g, '\\(')
+            .replace(/\)/g, "\\)");
     }
 }

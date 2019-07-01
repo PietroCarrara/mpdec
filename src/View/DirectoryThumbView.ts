@@ -22,11 +22,7 @@ export class DirectoryThumbView extends View {
         this.titleLabel.innerText = this.directory.path;
 
         var url = await this.directory.getThumbnailOrDefault();
-        url = encodeURI(url)
-            .replace(/'/g, "\\'")
-            .replace(/"/g, '\\"')
-            .replace(/\(/g, '\\(')
-            .replace(/\)/g, "\\)");
+        url = this.escapeUri(url);
 
         this.mainContainer.style.background = `url(file://${url})`;
 

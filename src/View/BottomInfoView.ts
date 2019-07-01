@@ -13,6 +13,8 @@ export class BottomInfoView extends View {
     private stateToggleButton: HTMLElement;
     private stateIcon: HTMLElement;
 
+    private albumImage: HTMLElement;
+
     private playerService: MusicPlayerService;
 
     constructor() {
@@ -35,6 +37,10 @@ export class BottomInfoView extends View {
         } else {
             this.stateIcon.innerText = 'pause';
         }
+
+        var url = await song.getThumbnailOrDefault();
+        this.albumImage.setAttribute('src', url);
+        console.log(this.albumImage, url);
     }
 
     public onLoad(): void {
@@ -47,7 +53,9 @@ export class BottomInfoView extends View {
         this.stateToggleButton = this.element.querySelector('#controls-state');
         this.stateIcon = this.element.querySelector('#state-icon');
 
-        this.prevSongButton.onclick = () => this.playerService.prev();
+        this.albumImage = this.element.querySelector('#album-image');
+
+        this.prevSongButton.onclick = () => this.playerService.prev(); 
         this.nextSongButton.onclick = () => this.playerService.next();
         this.stateToggleButton.onclick = () => this.playerService.togglePlaybackState();
     }
