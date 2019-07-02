@@ -40,7 +40,6 @@ export class BottomInfoView extends View {
 
         var url = await song.getThumbnailOrDefault();
         this.albumImage.setAttribute('src', url);
-        console.log(this.albumImage, url);
     }
 
     public onLoad(): void {

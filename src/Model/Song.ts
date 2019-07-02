@@ -67,11 +67,7 @@ export class Song {
     public async getThumbnailOrDefault() {
         var dir = dirname(this.path);
 
-        console.log(dir);
-
         var directory = Directory.fromPath(dir);
-
-        console.log(await directory.getContents());
 
         return directory.getThumbnailOrDefault();
     }
