@@ -3,21 +3,23 @@
 body {
   background-color: $bg;
   color: $fg;
+  
+  overflow: hidden;
 }
 
 #main-container {
-  position: fixed;
-  height: 80%;
-  bottom: 15%;
-  width: 100%;
   overflow-y: scroll;
+  overflow-x: hidden;
+  height: 100vh;
 }
-#bot-container {
-  position: fixed;
-  height: 15%;
-  bottom: 0;
-  width: 100%;
-}
+
+// #side-container {
+//   position: fixed;
+//   top: 0;
+//   left: 0;
+//   width: 20%;
+//   height: 100vh;
+// }
 
 // Bottom info
 .bottom-info {
@@ -25,9 +27,9 @@ body {
 
   .thumb-container {
     img {
-      object-fit: contain;
-      width: 100%;
-      height: 100%;
+      object-fit: cover;
+      max-width: 100%;
+      max-height: 100%;
     }
   }
 

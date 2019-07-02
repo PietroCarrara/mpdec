@@ -16,10 +16,10 @@ var notificationService = NotificationService.getInstance();
 notificationService.bootstrap();
 
 var mainContainer = document.getElementById('main-container');
-var bottomContainer = document.getElementById('bot-container');
+var sideContainer = document.getElementById('side-container');
 
 var directoryView = new DirectoryView(Directory.root);
 var bottomInfoView = new BottomInfoView();
 
 viewService.load(directoryView, mainContainer);
-viewService.load(bottomInfoView, bottomContainer);
+viewService.load(bottomInfoView, sideContainer);

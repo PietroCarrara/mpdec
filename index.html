@@ -12,20 +12,13 @@
 </head>
 
 <body class="d-flex flex-column h-100">
-
-  <!-- Topmost container. Maybe use to contain tabs? -->
-  <div id="top-container"></div>
-
-  <!-- Main container. Use to render current view -->
-  <main role="main" class="flex-shrink-0">
-    <div id="main-container"></div>
-  </main>
-
-  <!-- Bottommost container. Maybe use to contain info and a progress bar? -->
-  <footer class="footer fixed-bottom mt-auto py-3">
-    <div id="bot-container"></div>
-  </footer>
-
+  <div class="row">
+    <div id="side-container" class="col-2 pr-0"></div>
+    <div class="col-10">
+      <div class="row"></div>
+      <div id="main-container" class="row"></div>
+    </div>
+  </div>
 </body>
 
 <script>
