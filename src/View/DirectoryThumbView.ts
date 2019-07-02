@@ -22,9 +22,9 @@ export class DirectoryThumbView extends View {
         this.titleLabel.innerText = this.directory.path;
 
         var url = await this.directory.getThumbnailOrDefault();
-        url = this.escapeUri(url);
+        url = this.fileUri(url);
 
-        this.mainContainer.style.background = `url(file://${url})`;
+        this.mainContainer.style.background = `url(${url})`;
 
         this.mainContainer.onclick = async () => {
             var playerService = MusicPlayerService.getInstance();

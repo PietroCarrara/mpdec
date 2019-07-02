@@ -37,11 +37,9 @@ export abstract class View {
 
     }
 
-    protected escapeUri(uri: string) {
-        return encodeURI(uri)
-            .replace(/'/g, "\\'")
-            .replace(/"/g, '\\"')
-            .replace(/\(/g, '\\(')
-            .replace(/\)/g, "\\)");
+    protected fileUri(file: string) {
+        var uri = encodeURI(file);
+        
+        return `"file://${uri}"`;
     }
 }

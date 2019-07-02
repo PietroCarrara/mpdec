@@ -3,7 +3,7 @@
 body {
   background-color: $bg;
   color: $fg;
-  
+
   overflow: hidden;
 }
 
@@ -13,13 +13,18 @@ body {
   height: 100vh;
 }
 
-// #side-container {
-//   position: fixed;
-//   top: 0;
-//   left: 0;
-//   width: 20%;
-//   height: 100vh;
-// }
+.background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  background-size: cover;
+  background-position: center;
+  filter: blur(15px) brightness(50%);
+  transition: opacity 0.75s;
+}
 
 // Bottom info
 .bottom-info {
@@ -47,6 +52,8 @@ body {
   text-align: center;
   background-size: cover !important;
   background-position: center !important;
+  transition: filter .3s;
+  filter: drop-shadow(0 0px 8px black);
 
   .title {
     font-size: $albumThumbFontSize;
@@ -55,4 +62,8 @@ body {
     padding: 2px;
     background: rgba($bg, 0.8);
   }
+}
+
+.directory-thumb:hover {
+  filter: drop-shadow(0 8px 16px black);
 }
