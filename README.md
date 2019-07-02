@@ -1,6 +1,8 @@
 mpdec
 =====
 
+![Screenshot](screenshots/mpdec.png)
+
 Electron-based mpd client
 
 *Goals*:
