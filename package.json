@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Electron-based mpd client",
   "scripts": {
-    "build": "tsc && sass view/themes/:themes/",
+    "build": "tsc && sass view/themes/:themes/ && electron-rebuild",
     "lint": "tslint -c tslint.json -p tsconfig.json",
     "start": "npm run build && electron ./dist/main.js"
   },
@@ -17,13 +17,16 @@
   "author": "Pietro Carrara",
   "devDependencies": {
     "electron": "5.0.6",
-    "sass": "^1.22.1",
+    "electron-rebuild": "^1.8.5",
+    "sass": "^1.22.3",
     "tslint": "5.18.0",
     "typescript": "3.5.2"
   },
   "dependencies": {
+    "@types/sharp": "^0.22.2",
     "bootstrap": "^4.3.1",
     "material-design-icons": "^3.0.1",
-    "mpc-js": "^1.2.1"
+    "mpc-js": "^1.2.1",
+    "sharp": "^0.22.1"
   }
 }

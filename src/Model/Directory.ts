@@ -5,6 +5,7 @@ import { Assets } from './AssetsEnum';
 import { UserConfig } from './UserConfig';
 import { readdir } from 'fs';
 import { promisify } from 'util';
+import { ThumbnailCacheService } from '../Services/ThumbnailCacheService';
 
 const ls = promisify(readdir);
 
@@ -46,13 +47,13 @@ export class Directory {
         return this.contents;
     }
 
-    public async getThumbnailOrDefault() {
-        var res = await this.getThumbnail();
+    public async getArtOrDefault() {
+        var res = await this.getArt();
 
         return res || Assets.NoPic;
     }
 
-    public async getThumbnail(): Promise<string|null> {
+    public async getArt(): Promise<string | null> {
         var userConfig = UserConfig.getInstance();
         var res: string;
 
@@ -82,7 +83,7 @@ export class Directory {
             var playerService = MusicPlayerService.getInstance();
             for (var content of await playerService.getContentsOf(this.path)) {
                 if (content instanceof Directory) {
-                    var thumb = await content.getThumbnail();
+                    var thumb = await content.getArt();
                     if (thumb) {
                         return thumb;
                     }
@@ -93,5 +94,24 @@ export class Directory {
         }
 
         return res;
+    }
+
+    public async getThumbnailOrDefault() {
+        var thumb = await this.getThumbnail();
+
+        return thumb || Assets.NoPic;
+    }
+
+    public async getThumbnail() {
+        var cache = ThumbnailCacheService.getInstance();
+        var filename = await this.getArt();
+
+        if (filename) {
+            var thumb = await cache.getThumbnailForFile(filename);
+            
+            return thumb || filename;
+        }
+
+        return null;
     }
 }

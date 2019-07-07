@@ -64,6 +64,14 @@ export class Song {
         return this.path === s.path;
     }
 
+    public async getArtOrDefault() {
+        var dir = dirname(this.path);
+
+        var directory = Directory.fromPath(dir);
+
+        return directory.getArtOrDefault();
+    }
+
     public async getThumbnailOrDefault() {
         var dir = dirname(this.path);
 
