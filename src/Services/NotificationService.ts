@@ -27,7 +27,7 @@ export class NotificationService {
         this.playerService.onChangePlayer(async () => {
 
             var currentSong = await this.playerService.currentSong();
-            if (this.lastSong == null || !this.lastSong.equals(currentSong)) {
+            if (currentSong && (this.lastSong == null || !this.lastSong.equals(currentSong))) {
                 this.notifyPlaying(currentSong);
             }
             this.lastSong = currentSong;

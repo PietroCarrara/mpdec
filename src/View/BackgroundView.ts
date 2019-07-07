@@ -20,24 +20,26 @@ export class BackgroundView extends View {
         if (this.animationRunning) {
             this.onFinishAnimation();
         }
-        
+
         var song = await this.playerService.currentSong();
-        var url = this.fileUri(await song.getThumbnailOrDefault());
-        url = `url(${url})`;
+        if (song) {
+            var url = this.fileUri(await song.getArtOrDefault());
+            url = `url(${url})`;
 
-        if (this.mainBackground.style.backgroundImage ===  url) {
-            return;
+            if (this.mainBackground.style.backgroundImage === url) {
+                return;
+            }
+
+            this.secondaryBackground.style.backgroundImage = url;
+            this.secondaryBackground.style.opacity = `initial`;
+
+            this.mainBackground.style.opacity = '0';
+
+            this.animationRunning = true;
+            setTimeout(() => {
+                this.onFinishAnimation();
+            }, 1000);
         }
-
-        this.secondaryBackground.style.backgroundImage = url;
-        this.secondaryBackground.style.opacity = `initial`;
-
-        this.mainBackground.style.opacity = '0';
-
-        this.animationRunning = true;
-        setTimeout(() => {
-            this.onFinishAnimation();
-        }, 1000);
     }
 
     private onFinishAnimation() {
@@ -47,7 +49,7 @@ export class BackgroundView extends View {
         if (!this.animationRunning) {
             return;
         }
-        
+
         var main = this.mainBackground;
         this.mainBackground = this.secondaryBackground;
         this.secondaryBackground = main;

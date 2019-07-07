@@ -26,20 +26,22 @@ export class BottomInfoView extends View {
     }
 
     private async onChangePlayer() {
-        var song = await this.playerService.currentSong();
 
-        this.artistLabel.innerText = song.artist;
-        this.titleLabel.innerText = song.title;
-        this.albumLabel.innerText = song.album;
-
-        if (await this.playerService.getPlaybackState() != PlaybackState.Playing) {
-            this.stateIcon.innerText = 'play_arrow';
-        } else {
+        if (await this.playerService.getPlaybackState() === PlaybackState.Playing) {
             this.stateIcon.innerText = 'pause';
+        } else {
+            this.stateIcon.innerText = 'play_arrow';
         }
 
-        var url = await song.getThumbnailOrDefault();
-        this.albumImage.setAttribute('src', url);
+        var song = await this.playerService.currentSong();
+        if (song) {
+            this.titleLabel.innerText = song.title;
+            this.albumLabel.innerText = song.album;
+            this.artistLabel.innerText = song.artist;
+
+            var url = await song.getThumbnailOrDefault();
+            this.albumImage.setAttribute('src', url);
+        }
     }
 
     public onLoad(): void {
@@ -54,11 +56,11 @@ export class BottomInfoView extends View {
 
         this.albumImage = this.element.querySelector('#album-image');
 
-        this.prevSongButton.onclick = () => this.playerService.prev(); 
+        this.prevSongButton.onclick = () => this.playerService.prev();
         this.nextSongButton.onclick = () => this.playerService.next();
         this.stateToggleButton.onclick = () => this.playerService.togglePlaybackState();
     }
-    
+
     public onShow(): void {
         throw new Error("Method not implemented.");
     }

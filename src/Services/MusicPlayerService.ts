@@ -84,7 +84,13 @@ export class MusicPlayerService {
     }
     
     public async currentSong() {
-        return Song.fromMpdPlaylist(await this.mpc.status.currentSong());
+        var song = await this.mpc.status.currentSong();
+
+        if (song) {
+            return Song.fromMpdPlaylist(song);
+        }
+
+        return null;
     }
 
     public async next() {
