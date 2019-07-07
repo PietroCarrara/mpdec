@@ -29,6 +29,8 @@ body {
 // Bottom info
 .bottom-info {
   text-align: center;
+  border-right: 2px solid $bg;
+  background-color: rgba($bg, 0.5);
 
   .thumb-container {
     img {
