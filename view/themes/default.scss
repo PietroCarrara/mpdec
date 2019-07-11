@@ -60,8 +60,8 @@ body {
   text-align: center;
   background-size: cover !important;
   background-position: center !important;
-  transition: filter .3s;
-  filter: drop-shadow(0 0px 8px black);
+  transition: box-shadow .3s;
+  box-shadow: 0px 0px 16px 8px black;
 
   .title {
     font-size: $albumThumbFontSize;
@@ -73,5 +73,5 @@ body {
 }
 
 .directory-thumb:hover {
-  filter: drop-shadow(0 8px 16px black);
+  box-shadow: 0px 0px 12px 10px black;
 }
