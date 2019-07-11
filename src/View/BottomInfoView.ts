@@ -1,8 +1,12 @@
 import { View } from "./View";
 import { MusicPlayerService } from "../Services/MusicPlayerService";
 import { PlaybackState } from "../Model/PlaybackStateEnum";
+import { ViewService } from "../Services/ViewService";
+import { FadingImage, DisplayStrategy } from "./FadingImage";
 
 export class BottomInfoView extends View {
+
+    private viewService: ViewService = ViewService.getInstance();
 
     private artistLabel: HTMLElement;
     private titleLabel: HTMLElement;
@@ -13,7 +17,7 @@ export class BottomInfoView extends View {
     private stateToggleButton: HTMLElement;
     private stateIcon: HTMLElement;
 
-    private albumImage: HTMLElement;
+    private albumImage: FadingImage = new FadingImage(DisplayStrategy.Contain);
 
     private playerService: MusicPlayerService;
 
@@ -40,7 +44,8 @@ export class BottomInfoView extends View {
             this.artistLabel.innerText = song.artist;
 
             var url = await song.getThumbnailOrDefault();
-            this.albumImage.setAttribute('src', url);
+            url = `url(${url})`;
+            this.albumImage.setImage(url);
         }
     }
 
@@ -54,7 +59,8 @@ export class BottomInfoView extends View {
         this.stateToggleButton = this.element.querySelector('#controls-state');
         this.stateIcon = this.element.querySelector('#state-icon');
 
-        this.albumImage = this.element.querySelector('#album-image');
+        var albumDiv = this.element.querySelector('#album-image-container');
+        this.viewService.load(this.albumImage, albumDiv);
 
         this.prevSongButton.onclick = () => this.playerService.prev();
         this.nextSongButton.onclick = () => this.playerService.next();
