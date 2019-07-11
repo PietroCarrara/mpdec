@@ -15,7 +15,7 @@ export class ViewService {
         return ViewService.instance;
     }
 
-    public load(view: View, container: HTMLElement) {
+    public load(view: View, container: Element) {
         container.appendChild(view.element);
 
         view.onLoad();

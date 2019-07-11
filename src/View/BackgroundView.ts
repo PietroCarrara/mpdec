@@ -1,68 +1,34 @@
 import { View } from "./View";
 import { MusicPlayerService } from "../Services/MusicPlayerService";
+import { FadingImage, DisplayStrategy } from "./FadingImage";
+import { ViewService } from "../Services/ViewService";
 
 export class BackgroundView extends View {
 
     private playerService = MusicPlayerService.getInstance();
 
-    private mainBackground: HTMLElement;
-    private secondaryBackground: HTMLElement;
+    private viewService: ViewService = ViewService.getInstance();
 
-    private animationRunning: boolean;
+    private background: FadingImage = new FadingImage(DisplayStrategy.Cover);
 
     constructor() {
         super('backgroundView.html');
     }
 
     private async onMusicChange() {
-
-        // Force the animation to end
-        if (this.animationRunning) {
-            this.onFinishAnimation();
-        }
-
         var song = await this.playerService.currentSong();
         if (song) {
             var url = this.fileUri(await song.getArtOrDefault());
             url = `url(${url})`;
 
-            if (this.mainBackground.style.backgroundImage === url) {
-                return;
-            }
-
-            this.secondaryBackground.style.backgroundImage = url;
-            this.secondaryBackground.style.opacity = `initial`;
-
-            this.mainBackground.style.opacity = '0';
-
-            this.animationRunning = true;
-            setTimeout(() => {
-                this.onFinishAnimation();
-            }, 1000);
+            this.background.setImage(url);
         }
     }
 
-    private onFinishAnimation() {
-
-        // Don't do anything if the animation
-        // wasn't running
-        if (!this.animationRunning) {
-            return;
-        }
-
-        var main = this.mainBackground;
-        this.mainBackground = this.secondaryBackground;
-        this.secondaryBackground = main;
-        this.animationRunning = false;
-    }
-
-    public onLoad(): void {
-        this.mainBackground = this.element.querySelector('#background-main');
-
-        this.secondaryBackground = this.element.querySelector('#background-secondary');
-        this.secondaryBackground.style.opacity = '0';
-
+    public onLoad() : void {
         this.playerService.onChangePlayer(() => this.onMusicChange());
+
+        this.viewService.load(this.background, this.element);
 
         this.onMusicChange();
     }
