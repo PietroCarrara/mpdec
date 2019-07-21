@@ -21,10 +21,10 @@ export abstract class View {
     /**
      * Opens a new view on top of the current one
      *
-     * @param {View} view
+     * @param {View} view The new view to be shown
      * @memberof View
      */
-    public navigate(view: View) {
+    protected navigate(view: View) {
 
     }
 
@@ -33,13 +33,28 @@ export abstract class View {
      *
      * @memberof View
      */
-    public pop() {
+    protected pop() {
 
+    }
+
+    /**
+     * Hides this view
+     *
+     * @memberof View
+     */
+    public hide() {
+        this.element.classList.add('hidden');
+        this.onHide();
+    }
+
+    public show() {
+        this.element.classList.remove('hidden');
+        this.onShow();
     }
 
     protected fileUri(file: string) {
         var uri = encodeURI(file);
-        
+
         return `"file://${uri}"`;
     }
 }

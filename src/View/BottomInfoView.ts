@@ -68,10 +68,8 @@ export class BottomInfoView extends View {
     }
 
     public onShow(): void {
-        throw new Error("Method not implemented.");
     }
 
     public onHide(): void {
-        throw new Error("Method not implemented.");
     }
 }

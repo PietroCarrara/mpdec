@@ -21,7 +21,7 @@ export class FadingImage extends View {
     }
 
     public setImage(src: string) {
-        // Force the animation to end        
+        // Force the animation to end
         if (this.animationRunning) {
             this.onFinishAnimation();
         }
@@ -30,7 +30,6 @@ export class FadingImage extends View {
             return;
         }
 
-        console.log(src, this.secondaryImage, this.secondaryImage.style);
         this.secondaryImage.style.backgroundImage = src;
         this.secondaryImage.style.opacity = 'initial';
         this.secondaryImage.style.backgroundSize = this.displayStrategy;
@@ -62,14 +61,10 @@ export class FadingImage extends View {
         this.secondaryImage = main;
         this.animationRunning = false;
     }
-        
+
     public onShow(): void {
-        throw new Error("Method not implemented.");
     }
-    
+
     public onHide(): void {
-        throw new Error("Method not implemented.");
     }
-
-
 }

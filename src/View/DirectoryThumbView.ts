@@ -15,6 +15,10 @@ export class DirectoryThumbView extends View {
         this.directory = dir;
     }
 
+    public getDirectory() {
+        return this.directory;
+    }
+
     public async onLoad() {
         this.titleLabel = this.element.querySelector('#directory-title');
         this.mainContainer = this.element;
@@ -36,10 +40,8 @@ export class DirectoryThumbView extends View {
     }
 
     public onShow(): void {
-        throw new Error("Method not implemented.");
     }
 
     public onHide(): void {
-        throw new Error("Method not implemented.");
     }
 }
