@@ -13,6 +13,40 @@ body {
   height: 100vh;
 }
 
+@keyframes fade {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.fadeout-animation {
+  animation: fade .25s ease-in-out 0s 1 forwards;
+}
+
+#alert-container {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+
+  pointer-events: none;
+
+  div {
+    position: relative;
+    left: -50%;
+
+    background-color: rgba($bg, 0.8);
+    border-radius: 5%;
+
+    font-size: 18pt;
+    color: $fg;
+    padding: 4pt;
+    font-weight: bold;
+  }
+}
+
 .hidden {
   display: none !important;
 }

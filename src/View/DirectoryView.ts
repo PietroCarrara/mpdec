@@ -4,6 +4,7 @@ import { Song } from "../Model/Song";
 import { ViewService } from "../Services/ViewService";
 import { DirectoryThumbView } from "./DirectoryThumbView";
 import { InputService } from "../Services/InputService";
+import { AlertService } from "../Services/AlertService";
 
 export class DirectoryView extends View {
 
@@ -42,12 +43,16 @@ export class DirectoryView extends View {
     }
 
     private handleSearchKey(key: string) {
+        var alertService = AlertService.getInstance();
+
         if (key.length === 1) {
-            this.searchString += key;
+            this.searchString += key.toUpperCase();
+            alertService.alert(this.searchString);
         } else {
             switch (key) {
                 case 'Backspace':
                     this.searchString = this.searchString.substring(0, this.searchString.length - 1);
+                    alertService.alert(this.searchString);
                     break;
                 case 'Escape':
                     this.searchString = '';
@@ -60,7 +65,7 @@ export class DirectoryView extends View {
         for (var dirThumb of this.subDirectories) {
             var path = dirThumb.getDirectory().path;
 
-            if (!path.toLowerCase().includes(this.searchString.toLowerCase())) {
+            if (!path.toUpperCase().includes(this.searchString)) {
                 dirThumb.hide();
             } else {
                 dirThumb.show();
