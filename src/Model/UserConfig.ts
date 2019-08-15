@@ -8,9 +8,6 @@ export class UserConfig {
     /**
      * Absolute path where music is stored in the file system.
      * Should not include trailing '/'.
-     *
-     * @type {string}
-     * @memberof UserConfig
      */
     public musicDir: string;
 
