@@ -16,7 +16,7 @@
   ],
   "author": "Pietro Carrara",
   "devDependencies": {
-    "electron": "5.0.6",
+    "electron": "13.6.6",
     "electron-rebuild": "^1.8.5",
     "sass": "^1.22.3",
     "tslint": "5.18.0",
